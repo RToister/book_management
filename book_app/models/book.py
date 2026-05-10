@@ -1,8 +1,8 @@
 from sqlalchemy import String, Integer, ForeignKey, Enum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.models.base import Base
-from app.models.enums import GenreEnum
+from book_app.models.base import Base
+from book_app.models.enums import GenreEnum
 
 
 class Book(Base):
