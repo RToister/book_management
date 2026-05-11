@@ -1,13 +1,26 @@
-from sqlalchemy import Integer, String
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
 
-from book_app.models.base import Base
+from book_app.core.database import Base
 
 
 class Author(Base):
     __tablename__ = "authors"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
-    name: Mapped[str] = mapped_column(String(255), nullable=False)
+    id = Column(
+        Integer,
+        primary_key=True,
+        index=True
+    )
 
-    books = relationship("Book", back_populates="author")
+    name = Column(
+        String,
+        nullable=False,
+        unique=True
+    )
+
+    books = relationship(
+        "Book",
+        back_populates="author",
+        cascade="all, delete"
+    )

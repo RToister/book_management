@@ -1,17 +1,24 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict, Field
 
 
-class AuthorCreate(BaseModel):
-    name: str
+class AuthorBase(BaseModel):
+    name: str = Field(
+        min_length=1,
+        max_length=255
+    )
 
 
-class AuthorUpdate(BaseModel):
-    name: str
+class AuthorCreate(AuthorBase):
+    pass
 
 
-class AuthorResponse(BaseModel):
+class AuthorUpdate(AuthorBase):
+    pass
+
+
+class AuthorResponse(AuthorBase):
     id: int
-    name: str
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(
+        from_attributes=True
+    )

@@ -1,8 +1,17 @@
-from enum import Enum
+import enum
 
 
-class GenreEnum(str, Enum):
-    FICTION = "Fiction"
-    NON_FICTION = "Non-Fiction"
-    SCIENCE = "Science"
-    HISTORY = "History"
+class GenreEnum(str, enum.Enum):
+    fiction = "fiction"
+
+    non_fiction = "non_fiction"
+
+    science = "science"
+
+    history = "history"
+
+    fantasy = "fantasy"
+
+    horror = "horror"
+
+    romance = "romance"

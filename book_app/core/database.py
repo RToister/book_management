@@ -1,24 +1,28 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, DeclarativeBase
+from sqlalchemy.orm import declarative_base, sessionmaker
 
-DATABASE_URL = "postgresql+psycopg2://postgres:Fenomen_1997@localhost:5432/book_db"
+from book_app.core.config import settings
 
-engine = create_engine(DATABASE_URL)
 
-SessionLocal = sessionmaker(
-    bind=engine,
-    autoflush=False,
-    autocommit=False,
+engine = create_engine(
+    settings.DATABASE_URL,
+    echo=True
 )
 
+SessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine
+)
 
-class Base(DeclarativeBase):
-    pass
+Base = declarative_base()
 
 
 def get_db():
     db = SessionLocal()
+
     try:
         yield db
+
     finally:
         db.close()
