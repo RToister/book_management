@@ -27,22 +27,28 @@ def get_authors(db: Session = Depends(get_db)):
 @router.get("/{author_id}", response_model=AuthorResponse)
 def get_author(author_id: int, db: Session = Depends(get_db)):
     author = get_author_service(db, author_id)
+
     if not author:
         raise HTTPException(status_code=404, detail="Author not found")
+
     return author
 
 
 @router.put("/{author_id}", response_model=AuthorResponse)
 def update_author(author_id: int, author: AuthorUpdate, db: Session = Depends(get_db)):
     updated = update_author_service(db, author_id, author.name)
+
     if not updated:
         raise HTTPException(status_code=404, detail="Author not found")
+
     return updated
 
 
 @router.delete("/{author_id}")
 def delete_author(author_id: int, db: Session = Depends(get_db)):
     success = delete_author_service(db, author_id)
+
     if not success:
         raise HTTPException(status_code=404, detail="Author not found")
+
     return {"message": "deleted"}

@@ -2,7 +2,7 @@ from fastapi import APIRouter, UploadFile, File, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from book_app.core.database import get_db
-from book_app.services.import_service import (
+from book_app.services.import_export_service import (
     import_books_from_json,
     import_books_from_csv
 )
@@ -24,7 +24,10 @@ async def import_books(
         count = import_books_from_csv(db, content)
 
     else:
-        raise HTTPException(status_code=400, detail="Only CSV or JSON allowed")
+        raise HTTPException(
+            status_code=400,
+            detail="Only CSV or JSON allowed"
+        )
 
     return {
         "message": "import completed",

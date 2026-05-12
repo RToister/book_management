@@ -13,7 +13,7 @@ def create_author_service(db: Session, name: str):
     return create_author(db, name)
 
 
-def get_authors_service(db: Session):
+def list_authors_service(db: Session):
     return get_authors(db)
 
 
@@ -37,5 +37,4 @@ def delete_author_service(db: Session, author_id: int):
         return False
 
     delete_author(db, author)
-
     return True
