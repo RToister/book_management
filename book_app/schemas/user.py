@@ -5,8 +5,7 @@ class UserCreate(BaseModel):
     email: EmailStr
 
     password: str = Field(
-        min_length=6,
-        max_length=100
+        min_length=6
     )
 
 
@@ -18,5 +17,4 @@ class UserLogin(BaseModel):
 
 class Token(BaseModel):
     access_token: str
-
     token_type: str = "bearer"

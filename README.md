@@ -344,7 +344,3 @@ POST /import/books
 * Pytest configuration
 
 ---
-
-# Author
-
-Ruslan Toister
